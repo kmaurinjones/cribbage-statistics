@@ -1,0 +1,31 @@
+# Changelog
+
+All notable changes to this project will be documented in this file.
+
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+
+## [1.0.0] - 2025-11-07
+
+### Added
+- Initial release of Cribbage Statistics simulator and analysis tool
+- Core cribbage game simulation with full rule implementation
+- Random state tracking for reproducibility
+- Comprehensive analysis modules:
+  - Best/worst/middle-tier hand analysis
+  - Scoring distribution analysis
+  - Dealer advantage analysis
+  - Card values analysis with special 5s analysis
+- Markdown report generator with embedded visualizations
+- Three visualization plots: score distribution, dealer advantage, card values
+- CSV export for hands and game summaries
+- CLI interface with verbosity controls
+- Session logging system
+- Documentation: README, ANALYSIS_GUIDE, WORKFLOW, HAND_TRACKING_TODO
+
+### Features
+- Simulate 100k+ games with detailed tracking
+- Analyze card rank values and scoring patterns
+- Generate comprehensive markdown reports with explanations
+- Track random seeds for reproducible simulations
+- Export detailed hand-by-hand and game summary data
