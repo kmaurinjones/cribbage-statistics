@@ -30,6 +30,27 @@ from src.analysis.card_values import (
 )
 
 
+def convert_unicode_suits_to_ascii(card_string: str) -> str:
+    """Convert Unicode suit symbols to ASCII notation for markdown compatibility.
+
+    Args:
+        card_string: String with Unicode suits (♣, ♦, ♥, ♠)
+
+    Returns:
+        String with ASCII suit notation (C, D, H, S)
+    """
+    replacements = {
+        "♣": "C",
+        "♦": "D",
+        "♥": "H",
+        "♠": "S"
+    }
+    result = card_string
+    for unicode_suit, ascii_suit in replacements.items():
+        result = result.replace(unicode_suit, ascii_suit)
+    return result
+
+
 def generate_markdown_report(
     df: pd.DataFrame,
     output_dir: Path,
@@ -249,7 +270,7 @@ def generate_markdown_report(
     )
     for idx, row in best_dealt.iterrows():
         md_lines.append(
-            f"| {idx + 1} | {row['dealt_cards']} | {row['avg_score']:.2f} | {row['max_score']:.0f} | {row['count']:.0f} |"
+            f"| {idx + 1} | {convert_unicode_suits_to_ascii(row['dealt_cards'])} | {row['avg_score']:.2f} | {row['max_score']:.0f} | {row['count']:.0f} |"
         )
 
     md_lines.extend(
@@ -263,7 +284,7 @@ def generate_markdown_report(
     )
     for idx, row in best_kept.iterrows():
         md_lines.append(
-            f"| {idx + 1} | {row['kept_cards']} | {row['avg_score']:.2f} | {row['max_score']:.0f} | {row['count']:.0f} |"
+            f"| {idx + 1} | {convert_unicode_suits_to_ascii(row['kept_cards'])} | {row['avg_score']:.2f} | {row['max_score']:.0f} | {row['count']:.0f} |"
         )
 
     # Worst Hands
@@ -278,7 +299,7 @@ def generate_markdown_report(
     )
     for idx, row in worst_dealt.iterrows():
         md_lines.append(
-            f"| {idx + 1} | {row['dealt_cards']} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['count']:.0f} |"
+            f"| {idx + 1} | {convert_unicode_suits_to_ascii(row['dealt_cards'])} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['count']:.0f} |"
         )
 
     md_lines.extend(
@@ -292,7 +313,7 @@ def generate_markdown_report(
     )
     for idx, row in worst_kept.iterrows():
         md_lines.append(
-            f"| {idx + 1} | {row['kept_cards']} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['count']:.0f} |"
+            f"| {idx + 1} | {convert_unicode_suits_to_ascii(row['kept_cards'])} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['count']:.0f} |"
         )
 
     # Middle-tier Hands
@@ -307,7 +328,7 @@ def generate_markdown_report(
     )
     for idx, row in middle_dealt.iterrows():
         md_lines.append(
-            f"| {idx + 1} | {row['dealt_cards']} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['max_score']:.0f} | {row['count']:.0f} |"
+            f"| {idx + 1} | {convert_unicode_suits_to_ascii(row['dealt_cards'])} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['max_score']:.0f} | {row['count']:.0f} |"
         )
 
     md_lines.extend(
@@ -321,7 +342,7 @@ def generate_markdown_report(
     )
     for idx, row in middle_kept.iterrows():
         md_lines.append(
-            f"| {idx + 1} | {row['kept_cards']} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['max_score']:.0f} | {row['count']:.0f} |"
+            f"| {idx + 1} | {convert_unicode_suits_to_ascii(row['kept_cards'])} | {row['avg_score']:.2f} | {row['min_score']:.0f} | {row['max_score']:.0f} | {row['count']:.0f} |"
         )
 
     md_lines.extend(["", "---", ""])
